@@ -9,7 +9,7 @@ import {Debouncer} from '../utils/debounce.js';
 
 import {enqueueDebouncer, flush} from '../utils/flush.js';
 
-import {OptionalMutableData} from '../mixins/mutable-data.js';
+import {OptionalMutableData, OptionalMutableDataConstructor} from '../mixins/mutable-data.js';
 
 import {matches, translate} from '../utils/path.js';
 
@@ -18,6 +18,8 @@ import {timeOut, microTask} from '../utils/async.js';
 import {hideElementsGlobally} from '../utils/hide-template-controls.js';
 
 export {DomRepeat};
+
+declare const DomRepeat_Base: typeof PolymerElement & OptionalMutableDataConstructor;
 
 /**
  * The `<dom-repeat>` element will automatically stamp and binds one instance
@@ -114,9 +116,7 @@ export {DomRepeat};
  * <dom-repeat items="{{employees}}" filter="isEngineer" observe="type manager.type">
  * ```
  */
-declare class DomRepeat extends
-  OptionalMutableData(
-  PolymerElement) {
+declare class DomRepeat extends DomRepeat_Base {
   _templateInfo: TemplateInfo|null;
 
   /**

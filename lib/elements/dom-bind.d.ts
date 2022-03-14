@@ -1,14 +1,22 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 
-import {PropertyEffects} from '../mixins/property-effects.js';
+import {PropertyEffects, PropertyEffectsConstructor} from '../mixins/property-effects.js';
 
-import {OptionalMutableData} from '../mixins/mutable-data.js';
+import { PropertyAccessorsConstructor } from '../mixins/property-accessors';
 
-import {GestureEventListeners} from '../mixins/gesture-event-listeners.js';
+import { PropertiesChangedConstructor } from '../mixins/properties-changed.js';
+
+import {OptionalMutableData, OptionalMutableDataConstructor} from '../mixins/mutable-data.js';
+
+import {GestureEventListeners, GestureEventListenersConstructor} from '../mixins/gesture-event-listeners.js';
 
 import {hideElementsGlobally} from '../utils/hide-template-controls.js';
 
+import {TemplateStampConstructor} from '../mixins/template-stamp.js';
+
 export {DomBind};
+
+declare const DomBind_Base: typeof HTMLElement & GestureEventListenersConstructor & OptionalMutableDataConstructor & PropertyEffectsConstructor & TemplateStampConstructor & PropertyAccessorsConstructor & PropertiesChangedConstructor;
 
 /**
  * Custom element to allow using Polymer's template features (data binding,
@@ -20,11 +28,7 @@ export {DomBind};
  * document and bind elements to the `dom-bind` element itself as the
  * binding scope.
  */
-declare class DomBind extends
-  PropertyEffects(
-  OptionalMutableData(
-  GestureEventListeners(
-  HTMLElement))) {
+declare class DomBind extends DomBind_Base {
 
   /**
    * @param name Name of attribute that changed

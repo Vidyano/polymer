@@ -1,7 +1,13 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-import {PropertyEffects} from '../mixins/property-effects.js';
+import {PropertyEffects, PropertyEffectsConstructor} from '../mixins/property-effects.js';
+
+import { PropertyAccessorsConstructor } from '../mixins/property-accessors';
+
+import { PropertiesChangedConstructor } from '../mixins/properties-changed.js';
+
+import {TemplateStampConstructor} from '../mixins/template-stamp.js';
 
 import {MutableData} from '../mixins/mutable-data.js';
 
@@ -9,9 +15,9 @@ export {showHideChildren};
 
 declare function showHideChildren(): void;
 
-declare class TemplateInstanceBase extends
-  PropertyEffects(
-  HTMLElement) {
+declare const TemplateInstanceBase_Base: typeof HTMLElement & PropertyEffectsConstructor & TemplateStampConstructor & PropertyAccessorsConstructor & PropertiesChangedConstructor;
+
+declare class TemplateInstanceBase extends TemplateInstanceBase_Base {
   root: StampedTemplate;
   children: any;
 

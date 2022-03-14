@@ -79,3 +79,48 @@ export {resetMouseCanceller};
 declare function resetMouseCanceller(): void;
 
 import {GestureRecognizer} from '../../interfaces';
+
+export interface GestureEvent extends Event {
+    x: number;
+    y: number;
+    sourceEvent: Event;
+}
+
+export interface DownEvent extends GestureEvent {
+}
+
+export interface UpEvent extends GestureEvent {
+}
+
+export interface TapEvent extends GestureEvent {
+    model: any;
+    detail: {
+        sourceEvent: Event;
+        x: number;
+        y: number;
+    }
+}
+
+export interface TrackEvent extends GestureEvent {
+    detail: TrackEventDetail;
+}
+
+export interface TrackEventDetail {
+    /**
+         * state - a string indicating the tracking state:
+         * - start - fired when tracking is first detected (finger/button down and moved past a pre-set distance threshold)
+         * - track - fired while tracking
+     * - end - fired when tracking ends
+    */
+    state: "start" | "track" | "end";
+    /** clientX coordinate for event */
+    dx: number;
+    /** change in pixels vertically since the first track event */
+    dy: number;
+    /** change in pixels horizontally since last track event */
+    ddx: number;
+    /** change in pixels vertically since last track event */
+    ddy: number;
+    /** a function that may be called to determine the element currently being hovered */
+    hover(): Element;
+}
